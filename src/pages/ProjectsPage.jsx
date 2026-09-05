@@ -10,7 +10,7 @@ export default function ProjectsPage() {
         title="Selected work."
         intro="A collection of experiments, products and questions explored through code, data and machine learning."
       />
-      <section className="section archive">
+      <section className="py-[100px] border-t border-border max-[640px]:py-[72px]">
         <SectionLabel number="01">All projects</SectionLabel>
         <ProjectList projects={projects} />
       </section>

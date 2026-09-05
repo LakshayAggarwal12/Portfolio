@@ -4,27 +4,46 @@ import { ProjectPreview } from './portfolio-motion.jsx'
 
 export function ProjectRow({ project }) {
   return (
-    <Link to={`/projects/${project.slug}`} className="project-row">
-      <ProjectPreview image={project.previewImage} name={project.name} compact />
-      <span className="project-number">{project.number}</span>
-      <div className="project-main">
+    <Link
+      to={`/projects/${project.slug}`}
+      className="group grid grid-cols-[48px_120px_minmax(0,1fr)_28px] items-center gap-5 px-4 py-6 border-t border-border rounded-[14px] transition-all duration-200 hover:bg-bg-2 hover:px-6 cursor-pointer max-[640px]:grid-cols-[36px_minmax(0,1fr)_24px] max-[640px]:gap-3"
+    >
+      {/* Number */}
+      <span className="col-start-1 row-span-2 font-serif italic text-ink-3 text-[15px] max-[640px]:row-span-1">
+        {project.number}
+      </span>
+
+      {/* Preview thumbnail (hidden on mobile) */}
+      <div className="col-start-2 row-span-2 max-[640px]:hidden">
+        <ProjectPreview image={project.previewImage} name={project.name} compact />
+      </div>
+
+      {/* Main content */}
+      <div className="col-start-3 flex justify-between items-center gap-6 max-[640px]:col-start-2 max-[640px]:flex-col max-[640px]:items-start max-[640px]:gap-2">
         <div>
-          <h3>{project.name}</h3>
-          <p>{project.summary}</p>
+          <h3 className="text-xl font-bold tracking-[-0.025em] mb-1.5 text-ink max-[640px]:text-base">
+            {project.name}
+          </h3>
+          <p className="text-sm text-ink-2">{project.summary}</p>
         </div>
-        <div className="project-meta">
-          <span>{project.category}</span>
+        <div className="flex flex-col items-end gap-1 text-ink-3 text-xs font-medium text-right whitespace-nowrap max-[640px]:items-start max-[640px]:text-left">
+          <span className="text-ink-2 font-semibold">{project.category}</span>
           <span>{project.tags.join(' · ')}</span>
         </div>
       </div>
-      <ArrowUpRight className="row-arrow" size={20} />
+
+      {/* Arrow */}
+      <ArrowUpRight
+        className="col-start-4 row-span-2 text-accent transition-transform duration-200 group-hover:translate-x-[3px] group-hover:-translate-y-[3px] max-[640px]:row-span-1"
+        size={20}
+      />
     </Link>
   )
 }
 
 export function ProjectList({ projects }) {
   return (
-    <div className="project-list">
+    <div className="mt-[52px] [&>a:last-child]:border-b [&>a:last-child]:border-border">
       {projects.map((project) => (
         <ProjectRow key={project.slug} project={project} />
       ))}

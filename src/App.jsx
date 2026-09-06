@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import HomePage from './pages/HomePage.jsx'
 import AboutPage from './pages/AboutPage.jsx'
@@ -17,6 +18,21 @@ const router = createBrowserRouter([
   { path: '*', element: <NotFoundPage /> },
 ])
 
+/* Scroll to top on push/replace navigation while letting the browser restore
+   scroll position when the user goes back/forward. */
+function useScrollToTop() {
+  useEffect(
+    () =>
+      router.subscribe((state) => {
+        if (state.historyAction === 'PUSH' || state.historyAction === 'REPLACE') {
+          window.scrollTo(0, 0)
+        }
+      }),
+    [],
+  )
+}
+
 export default function App() {
+  useScrollToTop()
   return <RouterProvider router={router} />
 }

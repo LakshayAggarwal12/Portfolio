@@ -1,6 +1,5 @@
-import { Link } from 'react-router-dom'
-import { ArrowUpRight } from 'lucide-react'
 import { PageFrame } from '../components/portfolio-shell.jsx'
+import { InkButton } from '../components/ui.jsx'
 
 export default function NotFoundPage() {
   return (
@@ -13,12 +12,7 @@ export default function NotFoundPage() {
           404
         </h1>
         <p className="text-lg text-ink-2 mb-2">This page doesn&apos;t exist.</p>
-        <Link
-          className="inline-flex items-center gap-2 px-[22px] py-3.5 text-sm font-bold rounded-[10px] transition-all duration-200 bg-ink text-bg border-none tracking-tight hover:bg-accent hover:-translate-y-px hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)]"
-          to="/"
-        >
-          Back home <ArrowUpRight size={17} />
-        </Link>
+        <InkButton to="/">Back home</InkButton>
       </div>
     </PageFrame>
   )

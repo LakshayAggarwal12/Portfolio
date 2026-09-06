@@ -1,12 +1,16 @@
 import { useState } from 'react'
 import { ArrowUpRight, CheckCircle } from 'lucide-react'
 import { PageFrame, PageHeading } from '../components/portfolio-shell.jsx'
+import { InkButton } from '../components/ui.jsx'
 
 const socialLinks = [
   { label: 'GitHub', value: 'github.com/LakshayAggarwal12', href: 'https://github.com/LakshayAggarwal12' },
   { label: 'LinkedIn', value: 'Connect on LinkedIn', href: '#' },
   { label: 'Email', value: 'hello@lakshay.dev', href: 'mailto:hello@lakshay.dev' },
 ]
+
+const inputClass =
+  'w-full px-4 py-3.5 bg-bg-card border border-[1.5px] border-border rounded-lg text-ink text-[15px] font-normal transition-[border-color,box-shadow] duration-150 placeholder:text-ink-3 focus:border-accent focus:shadow-[0_0_0_3px_rgba(26,86,219,0.12)]'
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false)
@@ -23,7 +27,7 @@ export default function ContactPage() {
         title={
           <>
             Let&apos;s build something<br />
-            <em className="font-serif font-bold italic text-accent not-italic">worth talking about.</em>
+            <em className="font-serif font-bold text-accent not-italic">worth talking about.</em>
           </>
         }
         intro="Have a project idea, an opportunity, or just want to say hi? Drop me a message and I'll get back to you within a day."
@@ -33,18 +37,15 @@ export default function ContactPage() {
         {/* Form */}
         <div>
           {sent ? (
-            <div className="flex flex-col items-start gap-4 pt-2">
-              <CheckCircle size={40} className="text-green" />
+            <div className="flex flex-col items-start gap-4 pt-2" role="status">
+              <CheckCircle size={40} className="text-green" aria-hidden="true" />
               <h2 className="text-[22px] font-bold tracking-[-0.02em]">Message sent!</h2>
               <p className="text-ink-2 text-base leading-[1.7]">
                 Thanks for reaching out. I&apos;ll get back to you as soon as I can.
               </p>
-              <button
-                className="mt-2 inline-flex items-center gap-2 px-[22px] py-3.5 text-sm font-bold rounded-[10px] transition-all duration-200 bg-transparent text-ink border border-[1.5px] border-border tracking-tight hover:border-ink hover:-translate-y-px cursor-pointer"
-                onClick={() => setSent(false)}
-              >
+              <InkButton variant="ghost" onClick={() => setSent(false)}>
                 Send another message
-              </button>
+              </InkButton>
             </div>
           ) : (
             <form className="flex flex-col gap-6" onSubmit={submit}>
@@ -54,8 +55,9 @@ export default function ContactPage() {
                   <input
                     required
                     name="name"
+                    autoComplete="name"
                     placeholder="Lakshay Aggarwal"
-                    className="px-4 py-3.5 bg-bg-card border border-[1.5px] border-border rounded-lg text-ink text-[15px] font-normal outline-none resize-y transition-[border-color,box-shadow] duration-150 placeholder:text-ink-3 focus:border-accent focus:shadow-[0_0_0_3px_rgba(26,86,219,0.12)]"
+                    className={inputClass}
                   />
                 </label>
                 <label className="flex flex-col gap-2 text-[13px] font-semibold text-ink tracking-tight">
@@ -64,8 +66,9 @@ export default function ContactPage() {
                     required
                     type="email"
                     name="email"
+                    autoComplete="email"
                     placeholder="you@example.com"
-                    className="px-4 py-3.5 bg-bg-card border border-[1.5px] border-border rounded-lg text-ink text-[15px] font-normal outline-none resize-y transition-[border-color,box-shadow] duration-150 placeholder:text-ink-3 focus:border-accent focus:shadow-[0_0_0_3px_rgba(26,86,219,0.12)]"
+                    className={inputClass}
                   />
                 </label>
               </div>
@@ -73,8 +76,9 @@ export default function ContactPage() {
                 Subject
                 <input
                   name="subject"
+                  autoComplete="off"
                   placeholder="What's this about?"
-                  className="px-4 py-3.5 bg-bg-card border border-[1.5px] border-border rounded-lg text-ink text-[15px] font-normal outline-none resize-y transition-[border-color,box-shadow] duration-150 placeholder:text-ink-3 focus:border-accent focus:shadow-[0_0_0_3px_rgba(26,86,219,0.12)]"
+                  className={inputClass}
                 />
               </label>
               <label className="flex flex-col gap-2 text-[13px] font-semibold text-ink tracking-tight">
@@ -84,16 +88,11 @@ export default function ContactPage() {
                   name="message"
                   rows={6}
                   placeholder="Tell me a little about what you're working on or what's on your mind..."
-                  className="px-4 py-3.5 bg-bg-card border border-[1.5px] border-border rounded-lg text-ink text-[15px] font-normal outline-none min-h-[140px] resize-y transition-[border-color,box-shadow] duration-150 placeholder:text-ink-3 focus:border-accent focus:shadow-[0_0_0_3px_rgba(26,86,219,0.12)]"
+                  className={`${inputClass} min-h-[140px] resize-y`}
                 />
               </label>
               <div className="flex items-center gap-4 flex-wrap">
-                <button
-                  className="inline-flex items-center gap-2 px-[22px] py-3.5 text-sm font-bold rounded-[10px] transition-all duration-200 bg-ink text-bg border-none tracking-tight hover:bg-accent hover:-translate-y-px hover:shadow-[0_6px_20px_rgba(26,86,219,0.35)] cursor-pointer"
-                  type="submit"
-                >
-                  Send message <ArrowUpRight size={17} />
-                </button>
+                <InkButton type="submit">Send message</InkButton>
                 <span className="text-[13px] text-ink-3">Usually replies within 24 hours</span>
               </div>
             </form>

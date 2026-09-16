@@ -1,66 +1,88 @@
 import { useState } from 'react'
 import { ArrowUpRight, CheckCircle } from 'lucide-react'
-import { PageFrame, PageHeading } from '../components/portfolio-shell.jsx'
+import { Page, PageHeading } from '../components/portfolio-shell.jsx'
 import { InkButton } from '../components/ui.jsx'
+import { social } from '../lib/portfolio-data.js'
 
+/* Only links with a value are rendered, so filling one in portfolio-data
+   is all it takes to make it appear here. */
 const socialLinks = [
-  { label: 'GitHub', value: 'github.com/LakshayAggarwal12', href: 'https://github.com/LakshayAggarwal12' },
-  { label: 'LinkedIn', value: 'Connect on LinkedIn', href: '#' },
-  { label: 'Email', value: 'hello@lakshay.dev', href: 'mailto:hello@lakshay.dev' },
-]
+  social.github && { label: 'GitHub', value: social.github.replace(/^https?:\/\//, ''), href: social.github },
+  social.linkedin && { label: 'LinkedIn', value: 'Connect on LinkedIn', href: social.linkedin },
+  social.resume && { label: 'Résumé', value: 'Download a PDF', href: social.resume },
+  social.email && { label: 'Email', value: social.email, href: `mailto:${social.email}` },
+].filter(Boolean)
 
 const inputClass =
-  'w-full px-4 py-3.5 bg-bg-card border border-[1.5px] border-border rounded-lg text-ink text-[15px] font-normal transition-[border-color,box-shadow] duration-150 placeholder:text-ink-3 focus:border-accent focus:shadow-[0_0_0_3px_rgba(26,86,219,0.12)]'
+  'w-full min-h-[46px] rounded-lg border-[1.5px] border-border bg-bg-card px-4 py-3 text-[15px] font-normal text-ink transition-[border-color,box-shadow] duration-150 placeholder:text-ink-3 focus:border-accent focus:shadow-[0_0_0_3px_rgba(26,86,219,0.12)]'
+
+const labelClass = 'flex flex-col gap-2 text-[13px] font-semibold tracking-tight text-ink'
 
 export default function ContactPage() {
   const [sent, setSent] = useState(false)
 
-  function submit(e) {
-    e.preventDefault()
+  /* There's no backend, so the form hands off to the visitor's mail client
+     with everything pre-filled rather than silently going nowhere. */
+  function submit(event) {
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
+    const name = data.get('name')?.toString().trim() ?? ''
+    const email = data.get('email')?.toString().trim() ?? ''
+    const subject = data.get('subject')?.toString().trim() || `Portfolio enquiry from ${name}`
+    const message = data.get('message')?.toString().trim() ?? ''
+
+    if (social.email) {
+      const body = `${message}\n\n—\n${name}\n${email}`
+      window.location.href = `mailto:${social.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    }
     setSent(true)
   }
 
   return (
-    <PageFrame>
+    <Page className="pb-14 sm:pb-16">
       <PageHeading
         eyebrow="Open to good conversations"
         title={
           <>
-            Let&apos;s build something<br />
-            <em className="font-serif font-bold text-accent not-italic">worth talking about.</em>
+            Let&apos;s build something{' '}
+            <em className="font-serif font-bold not-italic text-accent">worth talking about.</em>
           </>
         }
-        intro="Have a project idea, an opportunity, or just want to say hi? Drop me a message and I'll get back to you within a day."
+        intro="Have a project idea, an opportunity, or just want to say hi? Send a message and I'll get back to you within a day."
       />
 
-      <div className="grid grid-cols-[1.2fr_0.8fr] gap-20 py-[60px] pb-[100px] max-[900px]:grid-cols-1 max-[900px]:gap-12 max-[640px]:py-12 max-[640px]:pb-[72px]">
+      <div className="grid grid-cols-1 gap-10 py-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 lg:py-12">
         {/* Form */}
-        <div>
+        <div className="min-w-0">
           {sent ? (
-            <div className="flex flex-col items-start gap-4 pt-2" role="status">
-              <CheckCircle size={40} className="text-green" aria-hidden="true" />
-              <h2 className="text-[22px] font-bold tracking-[-0.02em]">Message sent!</h2>
-              <p className="text-ink-2 text-base leading-[1.7]">
-                Thanks for reaching out. I&apos;ll get back to you as soon as I can.
+            <div className="flex flex-col items-start gap-3 rounded-[18px] border border-border bg-bg-2 p-7" role="status">
+              <CheckCircle size={34} className="text-green" aria-hidden="true" />
+              <h2 className="text-[21px] font-bold tracking-[-0.025em] text-ink">
+                Your email is ready to send.
+              </h2>
+              <p className="measure text-[15px] leading-[1.7] text-ink-2">
+                Your mail app should have opened with the message filled in. If it didn&apos;t,
+                write to{' '}
+                <a
+                  className="font-semibold text-accent underline underline-offset-2"
+                  href={`mailto:${social.email}`}
+                >
+                  {social.email}
+                </a>{' '}
+                directly.
               </p>
-              <InkButton variant="ghost" onClick={() => setSent(false)}>
-                Send another message
+              <InkButton variant="ghost" showArrow={false} onClick={() => setSent(false)} className="mt-2">
+                Write another message
               </InkButton>
             </div>
           ) : (
-            <form className="flex flex-col gap-6" onSubmit={submit}>
-              <div className="grid grid-cols-2 gap-5 max-[640px]:grid-cols-1">
-                <label className="flex flex-col gap-2 text-[13px] font-semibold text-ink tracking-tight">
+            <form className="flex flex-col gap-5" onSubmit={submit} noValidate={false}>
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                <label className={labelClass}>
                   Your name
-                  <input
-                    required
-                    name="name"
-                    autoComplete="name"
-                    placeholder="Lakshay Aggarwal"
-                    className={inputClass}
-                  />
+                  <input required name="name" autoComplete="name" placeholder="Jane Doe" className={inputClass} />
                 </label>
-                <label className="flex flex-col gap-2 text-[13px] font-semibold text-ink tracking-tight">
+                <label className={labelClass}>
                   Email address
                   <input
                     required
@@ -72,7 +94,7 @@ export default function ContactPage() {
                   />
                 </label>
               </div>
-              <label className="flex flex-col gap-2 text-[13px] font-semibold text-ink tracking-tight">
+              <label className={labelClass}>
                 Subject
                 <input
                   name="subject"
@@ -81,18 +103,20 @@ export default function ContactPage() {
                   className={inputClass}
                 />
               </label>
-              <label className="flex flex-col gap-2 text-[13px] font-semibold text-ink tracking-tight">
+              <label className={labelClass}>
                 Message
                 <textarea
                   required
                   name="message"
                   rows={6}
-                  placeholder="Tell me a little about what you're working on or what's on your mind..."
+                  placeholder="Tell me a little about what you're working on…"
                   className={`${inputClass} min-h-[140px] resize-y`}
                 />
               </label>
-              <div className="flex items-center gap-4 flex-wrap">
-                <InkButton type="submit">Send message</InkButton>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
+                <InkButton type="submit" showArrow={false}>
+                  Send message
+                </InkButton>
                 <span className="text-[13px] text-ink-3">Usually replies within 24 hours</span>
               </div>
             </form>
@@ -100,43 +124,52 @@ export default function ContactPage() {
         </div>
 
         {/* Aside */}
-        <aside className="pt-2">
-          <p className="text-[13px] font-bold tracking-[0.1em] uppercase text-ink-3 mb-6">
+        <aside className="min-w-0">
+          <h2 className="mb-5 text-[11px] font-bold uppercase tracking-[0.12em] text-ink-3">
             Find me elsewhere
-          </p>
+          </h2>
 
-          {socialLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="flex items-center justify-between py-[18px] border-t border-border first:border-t-0 text-ink-2 text-[15px] font-medium transition-colors duration-150 hover:text-ink"
-              target={link.href.startsWith('http') ? '_blank' : undefined}
-              rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-            >
-              <span>
-                <span className="block text-xs font-semibold tracking-[0.08em] uppercase text-accent mb-1">
-                  {link.label}
-                </span>
-                {link.value}
-              </span>
-              <ArrowUpRight size={16} className="text-accent flex-shrink-0" />
-            </a>
-          ))}
+          <ul className="list-none p-0">
+            {socialLinks.map((link) => (
+              <li key={link.label}>
+                <a
+                  href={link.href}
+                  className="group flex min-h-[64px] items-center justify-between gap-4 border-t border-border py-4 text-[15px] font-medium text-ink-2 transition-colors duration-150 first:border-t-0 hover:text-ink"
+                  target={link.href.startsWith('http') ? '_blank' : undefined}
+                  rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                >
+                  <span className="min-w-0">
+                    <span className="mb-0.5 block text-[11px] font-bold uppercase tracking-[0.1em] text-accent">
+                      {link.label}
+                    </span>
+                    <span className="block truncate">{link.value}</span>
+                  </span>
+                  <ArrowUpRight
+                    size={16}
+                    aria-hidden="true"
+                    className="shrink-0 text-accent transition-transform duration-200 group-hover:-translate-y-[2px] group-hover:translate-x-[2px]"
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
 
-          <div className="mt-10 p-6 bg-bg-2 border border-border rounded-[20px]">
-            <p className="text-[13px] font-bold text-ink mb-1.5">
+          <div className="mt-8 rounded-[16px] border border-border bg-bg-2 p-5">
+            <p className="mb-1.5 flex items-center gap-2 text-[13px] font-bold text-ink">
               <span
-                className="inline-block w-2 h-2 rounded-full bg-green mr-2"
+                aria-hidden="true"
+                className="inline-block h-2 w-2 rounded-full bg-green"
                 style={{ boxShadow: '0 0 8px var(--color-green)' }}
               />
               Available for work
             </p>
-            <p className="text-[13px] text-ink-2 leading-[1.6]">
-              I&apos;m currently open to internships, part-time contracts, and interesting project collaborations.
+            <p className="text-[13px] leading-[1.6] text-ink-2">
+              Currently open to internships, part-time contracts and interesting project
+              collaborations.
             </p>
           </div>
         </aside>
       </div>
-    </PageFrame>
+    </Page>
   )
 }

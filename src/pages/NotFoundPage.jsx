@@ -1,19 +1,28 @@
-import { PageFrame } from '../components/portfolio-shell.jsx'
+import { Page } from '../components/portfolio-shell.jsx'
 import { InkButton } from '../components/ui.jsx'
 
 export default function NotFoundPage() {
   return (
-    <PageFrame>
-      <div className="min-h-[calc(100svh-64px)] flex flex-col items-center justify-center gap-5 text-center py-[60px]">
-        <h1
-          className="font-extrabold tracking-[-0.06em] text-border leading-none"
-          style={{ fontSize: 'clamp(80px, 15vw, 180px)' }}
-        >
-          404
-        </h1>
-        <p className="text-lg text-ink-2 mb-2">This page doesn&apos;t exist.</p>
+    <Page center className="py-16 text-center">
+      <p
+        aria-hidden="true"
+        className="font-extrabold leading-none tracking-[-0.06em] text-border"
+        style={{ fontSize: 'clamp(76px, 15vw, 172px)' }}
+      >
+        404
+      </p>
+      <h1 className="mt-4 text-[26px] font-bold tracking-[-0.03em] text-ink sm:text-[32px]">
+        This page doesn&apos;t exist.
+      </h1>
+      <p className="measure mx-auto mt-3 text-[15px] leading-[1.7] text-ink-2">
+        The link may be out of date. Head back to the homepage, or jump straight to the work.
+      </p>
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
         <InkButton to="/">Back home</InkButton>
+        <InkButton to="/projects" variant="ghost">
+          See the projects
+        </InkButton>
       </div>
-    </PageFrame>
+    </Page>
   )
 }

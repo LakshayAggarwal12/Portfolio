@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* Colors */
+  /* Colors — Paper & Ink */
   --color-bg:        #faf9f7;
   --color-bg-2:      #f2f0ec;
   --color-bg-card:   #ffffff;
@@ -27,6 +27,9 @@
   --shadow-sm: 0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
   --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
   --shadow-lg: 0 20px 60px rgba(0,0,0,.10), 0 8px 24px rgba(0,0,0,.06);
+
+  /* Motion — one shared easing curve so every transition feels related */
+  --ease-ink: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Dark mode token overrides */
@@ -46,12 +49,37 @@
   --shadow-lg: 0 20px 60px rgba(0,0,0,.4);
 }
 
-/* Global base */
+/* Global base.
+   The app is an app-shell: the document itself never scrolls. The single
+   scroll region lives inside <main>, so every route opens as a clean,
+   complete screen instead of a random slice of a long document. */
 html {
   background: var(--color-bg);
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* Header height, as a token. The scroll region derives its height from
+   this rather than from a chain of percentage heights, which browsers
+   resolve inconsistently once any ancestor is auto-height. */
+:root {
+  --header-h: 56px;
+}
+@media (min-width: 640px) {
+  :root {
+    --header-h: 64px;
+  }
+}
+
+body {
+  font-family: var(--font-sans);
 }
 
 /* Accessibility — visible focus ring only for keyboard users */
@@ -76,8 +104,13 @@ html {
   50%      { transform: translate3d(0, -7px, 0) rotate(0.5deg); }
 }
 
-/* Eyebrow pseudo-element — cannot be done with plain Tailwind utilities */
+@keyframes scroll-nudge {
+  0%, 100% { transform: translateY(0); opacity: .55; }
+  50%      { transform: translateY(5px); opacity: 1; }
+}
+
 @layer utilities {
+  /* Eyebrow rule — pseudo-element, not expressible as a plain utility */
   .eyebrow::before {
     content: '';
     display: block;
@@ -95,23 +128,67 @@ html {
     background-size: 120px 120px;
   }
 
-  .paper-float {
-    animation: paper-float 6.5s ease-in-out infinite;
+  .paper-float      { animation: paper-float 6.5s ease-in-out infinite; }
+  .paper-float-slow { animation: paper-float 9.5s ease-in-out infinite; }
+  .scroll-nudge     { animation: scroll-nudge 2s ease-in-out infinite; }
+
+  /* The single scroll region. Keeps momentum scrolling on iOS, stops the
+     scroll chaining that makes nested regions feel broken. */
+  .scroll-region {
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+  }
+  .scroll-region::-webkit-scrollbar {
+    width: 10px;
+  }
+  .scroll-region::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scroll-region::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border: 3px solid var(--color-bg);
+    border-radius: 999px;
+  }
+  .scroll-region::-webkit-scrollbar-thumb:hover {
+    background: var(--color-ink-3);
   }
 
-  .paper-float-slow {
-    animation: paper-float 9.5s ease-in-out infinite;
+  /* Page gutter — one source of truth so every page lines up */
+  .page-x {
+    padding-inline: clamp(20px, 4.2vw, 48px);
+  }
+
+  /* Exactly one screen of the scroll region. `svh` is the small viewport
+     height, so this never overflows when mobile browser chrome is shown. */
+  .min-h-region {
+    min-height: calc(100svh - var(--header-h));
+  }
+
+  /* Comfortable measure for body copy (~65 characters) */
+  .measure {
+    max-width: 62ch;
+  }
+  .measure-tight {
+    max-width: 48ch;
+  }
+
+  /* Card lift used by project rows and note cards — no layout shift */
+  .lift {
+    transition: transform .22s var(--ease-ink), box-shadow .22s var(--ease-ink),
+                background-color .18s linear, border-color .18s linear;
   }
 }
 
-/* Reduced motion */
+/* Reduced motion — strip animation, keep every state reachable */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-  .name-transition {
-    display: none !important;
   }
 }

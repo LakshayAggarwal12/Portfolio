@@ -2,15 +2,38 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9f7" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0c0d0e" />
     <title>Lakshay Aggarwal — Software Engineer &amp; AI/ML Developer</title>
-    <meta name="description" content="The portfolio of Lakshay Aggarwal - software engineering, data science and AI/ML projects." />
+    <meta name="description" content="Portfolio of Lakshay Aggarwal — full stack development, data science and AI/ML projects." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Lakshay Aggarwal — Software Engineer &amp; AI/ML Developer" />
+    <meta property="og:description" content="Portfolio of Lakshay Aggarwal — full stack development, data science and AI/ML projects." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-icon.png" />
+
+    <!-- Apply the saved theme before first paint so dark-mode visitors
+         never see a flash of the light palette. -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme')
+          var dark = stored ? stored === 'dark'
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+          if (dark) document.documentElement.classList.add('dark')
+          var meta = document.querySelector('meta[name="theme-color"]')
+          if (meta && dark) meta.setAttribute('content', '#0c0d0e')
+        } catch (e) {}
+      })()
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,400;1,700&display=swap" rel="stylesheet" />
+    <!-- Trimmed to the weights actually used: 400/500/600/700/800 Inter,
+         700 Playfair. Three unused weights removed from the request. -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>

@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'motion/react'
 
@@ -26,6 +25,10 @@ function ScribbleRing({ className = '' }) {
 
 const springTilt = { stiffness: 120, damping: 18, mass: 0.6 }
 
+/**
+ * The hero "identity card" — the one place the portfolio spends its
+ * boldness. Everything around it stays quiet.
+ */
 export function LiveCharacterPlaceholder() {
   const reduce = useReducedMotion()
   const [canTilt] = useState(
@@ -38,8 +41,8 @@ export function LiveCharacterPlaceholder() {
   /* Mouse parallax — springs keep it smooth without re-renders */
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [6, -6]), springTilt)
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-9, 9]), springTilt)
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [5, -5]), springTilt)
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-7, 7]), springTilt)
 
   const handleMove = (event) => {
     if (!canTilt) return
@@ -54,19 +57,21 @@ export function LiveCharacterPlaceholder() {
   }
 
   const entrance = {
-    initial: reduce ? false : { opacity: 0, y: 30, rotate: -2.5 },
+    initial: reduce ? false : { opacity: 0, y: 24, rotate: -2 },
     animate: reduce ? undefined : { opacity: 1, y: 0, rotate: 0 },
-    transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.1 },
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 },
   }
 
   const ticket = {
-    initial: reduce ? false : { opacity: 0, y: 18, scale: 0.92 },
+    initial: reduce ? false : { opacity: 0, y: 14, scale: 0.94 },
     animate: reduce ? undefined : { opacity: 1, y: 0, scale: 1 },
   }
 
   return (
-    <div className="flex justify-center items-center">
-      <div className="relative w-[min(100%,420px)] aspect-[4/5] max-[640px]:aspect-[3/4] max-[900px]:w-[min(100%,360px)] max-[900px]:mx-auto">
+    <div className="flex items-center justify-center">
+      {/* Sized down from the original so the hero resolves to a single
+          screen on laptops instead of spilling into the next section. */}
+      <div className="relative aspect-[4/5] w-[min(76vw,260px)] sm:w-[min(60vw,300px)] lg:w-[min(100%,340px)] xl:w-[min(100%,372px)]">
         {/* Entrance + idle float */}
         <motion.div className="absolute inset-0" {...entrance}>
           <div className="absolute inset-0 paper-float">
@@ -77,47 +82,56 @@ export function LiveCharacterPlaceholder() {
                 style={{ rotateX, rotateY, transformPerspective: 900 }}
               >
                 {/* Paper card */}
-                <div className="absolute inset-0 overflow-hidden rounded-[26px] border border-border bg-bg-card shadow-[0_28px_60px_-24px_rgba(20,18,16,0.22)]">
+                <div className="absolute inset-0 overflow-hidden rounded-[24px] border border-border bg-bg-card shadow-[0_28px_60px_-28px_rgba(20,18,16,0.25)]">
                   <div className="absolute inset-0 paper-grain opacity-[0.35]" aria-hidden="true" />
 
                   {/* Tape pieces */}
-                  <span aria-hidden="true" className="absolute -top-2.5 left-[14%] h-[30px] w-[92px] rotate-[-4deg] rounded-[3px] border border-border/80 bg-bg-2/90 shadow-sm" />
-                  <span aria-hidden="true" className="absolute -top-2.5 right-[16%] h-[30px] w-[74px] rotate-[5deg] rounded-[3px] border border-border/80 bg-bg-2/90 shadow-sm" />
+                  <span
+                    aria-hidden="true"
+                    className="absolute -top-2.5 left-[14%] h-[28px] w-[84px] rotate-[-4deg] rounded-[3px] border border-border/80 bg-bg-2/90 shadow-sm"
+                  />
+                  <span
+                    aria-hidden="true"
+                    className="absolute -top-2.5 right-[16%] h-[28px] w-[66px] rotate-[5deg] rounded-[3px] border border-border/80 bg-bg-2/90 shadow-sm"
+                  />
 
                   {/* Dashed inner frame */}
-                  <div className="absolute inset-3 rounded-[20px] border border-dashed border-ink-3/40 pointer-events-none" aria-hidden="true" />
+                  <div
+                    className="pointer-events-none absolute inset-3 rounded-[18px] border border-dashed border-ink-3/40"
+                    aria-hidden="true"
+                  />
 
                   {/* Stamp */}
-                  <span className="absolute right-5 top-5 rotate-[6deg] rounded-[4px] border border-accent/50 px-2 py-1 text-[9px] font-bold uppercase tracking-[0.22em] text-accent pointer-events-none">
+                  <span className="pointer-events-none absolute right-4 top-4 rotate-[6deg] rounded-[4px] border border-accent/50 px-2 py-1 text-[9px] font-bold uppercase tracking-[0.22em] text-accent">
                     AI / ML
                   </span>
 
                   {/* Monogram */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center px-7 text-center">
+                  <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
                     <div className="relative mb-1 flex items-center justify-center">
-                      <ScribbleRing className="absolute w-[248px] max-w-[82vw]" />
+                      <ScribbleRing className="absolute w-[210px] max-w-[78%] sm:w-[232px]" />
                       <span
-                        className="relative font-serif font-bold text-ink select-none"
-                        style={{ fontSize: 'clamp(64px, 11vw, 104px)', letterSpacing: '-0.05em' }}
+                        className="relative select-none font-serif font-bold text-ink"
+                        style={{ fontSize: 'clamp(54px, 9vw, 92px)', letterSpacing: '-0.05em' }}
                       >
                         LA
                       </span>
                     </div>
-                    <span className="mt-1 text-[10px] font-bold uppercase tracking-[0.26em] text-ink-3">
+                    <span className="mt-1 text-[9.5px] font-bold uppercase tracking-[0.24em] text-ink-3">
                       Lakshay Aggarwal
                     </span>
-                    <div className="my-4 h-px w-20 bg-border" aria-hidden="true" />
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-2">
+                    <div className="my-3.5 h-px w-16 bg-border" aria-hidden="true" />
+                    <span className="text-[10.5px] font-semibold uppercase tracking-[0.14em] text-ink-2">
                       Software Engineer · AI / ML
                     </span>
                   </div>
 
                   {/* Bottom strip */}
-                  <div className="absolute inset-x-0 bottom-0 flex h-[52px] items-center justify-between border-t border-dashed border-ink-3/40 px-6">
+                  <div className="absolute inset-x-0 bottom-0 flex h-[46px] items-center justify-between border-t border-dashed border-ink-3/40 px-5">
                     <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-ink-3">
                       Est. curiosity
                     </span>
-                    <span className="font-serif italic text-[13px] text-ink-2">
+                    <span className="font-serif text-[12px] italic text-ink-2">
                       handcrafted with code
                     </span>
                   </div>
@@ -126,42 +140,47 @@ export function LiveCharacterPlaceholder() {
             </div>
           </div>
         </motion.div>
-{/* Floating paper tickets */}
+
+        {/* Floating paper tickets — desktop only, where there is room for
+            them to sit outside the card without causing overflow. */}
         <motion.div
-          className="absolute top-[15%] right-[-9%] z-20 max-[900px]:hidden"
+          className="absolute right-[-10%] top-[14%] z-20 hidden lg:block"
           {...ticket}
-          transition={{ delay: 0.55, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 0.5, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="paper-float-slow flex items-center gap-2.5 whitespace-nowrap rounded-[12px] border border-border bg-bg-card px-3.5 py-2.5 shadow-[0_12px_28px_-14px_rgba(20,18,16,0.28)]">
-            <span className="font-serif italic text-[13px] font-bold text-accent">01</span>
+          <div className="paper-float-slow flex items-center gap-2.5 whitespace-nowrap rounded-[12px] border border-border bg-bg-card px-3.5 py-2.5 shadow-[0_12px_28px_-16px_rgba(20,18,16,0.3)]">
+            <span className="font-serif text-[13px] font-bold italic text-accent">01</span>
             <span className="text-xs font-semibold text-ink">AI / ML Projects</span>
           </div>
         </motion.div>
 
         <motion.div
-          className="absolute bottom-[27%] right-[-7%] z-20 max-[900px]:hidden"
+          className="absolute bottom-[26%] right-[-8%] z-20 hidden lg:block"
           {...ticket}
-          transition={{ delay: 0.8, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 0.72, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         >
           <div
-            className="paper-float-slow flex items-center gap-2.5 whitespace-nowrap rounded-[12px] border border-border bg-bg-card px-3.5 py-2.5 shadow-[0_12px_28px_-14px_rgba(20,18,16,0.28)]"
+            className="paper-float-slow flex items-center gap-2.5 whitespace-nowrap rounded-[12px] border border-border bg-bg-card px-3.5 py-2.5 shadow-[0_12px_28px_-16px_rgba(20,18,16,0.3)]"
             style={{ animationDelay: '-2.5s' }}
           >
-            <span className="h-2 w-2 rounded-full bg-green shadow-[0_0_8px_var(--color-green)]" aria-hidden="true" />
+            <span
+              className="h-2 w-2 rounded-full bg-green shadow-[0_0_8px_var(--color-green)]"
+              aria-hidden="true"
+            />
             <span className="text-xs font-semibold text-ink">Open to opportunities</span>
           </div>
         </motion.div>
 
         <motion.div
-          className="absolute bottom-[9%] left-[-8%] z-20 max-[900px]:hidden"
+          className="absolute bottom-[8%] left-[-9%] z-20 hidden lg:block"
           {...ticket}
-          transition={{ delay: 1.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 0.94, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         >
           <div
-            className="paper-float-slow flex items-center gap-2.5 whitespace-nowrap rounded-[12px] border border-border bg-bg-card px-3.5 py-2.5 shadow-[0_12px_28px_-14px_rgba(20,18,16,0.28)]"
+            className="paper-float-slow flex items-center gap-2.5 whitespace-nowrap rounded-[12px] border border-border bg-bg-card px-3.5 py-2.5 shadow-[0_12px_28px_-16px_rgba(20,18,16,0.3)]"
             style={{ animationDelay: '-1.5s' }}
           >
-            <span className="font-serif italic text-[13px] font-bold text-ink-2">02</span>
+            <span className="font-serif text-[13px] font-bold italic text-ink-2">02</span>
             <span className="text-xs font-semibold text-ink">Full Stack Dev</span>
           </div>
         </motion.div>
@@ -169,75 +188,40 @@ export function LiveCharacterPlaceholder() {
     </div>
   )
 }
+
+/**
+ * Project thumbnail. Uses an aspect ratio rather than a min-height so it
+ * scales cleanly inside both the ledger row and the case-study header.
+ */
 export function ProjectPreview({ image, name, compact = false }) {
   return (
     <div
-      className={`relative flex flex-col items-center justify-center gap-2.5 overflow-hidden border border-border bg-bg-card ${
-        compact ? 'min-h-[110px] rounded-[8px]' : 'min-h-[200px] rounded-[14px]'
+      className={`relative flex w-full flex-col items-center justify-center gap-2 overflow-hidden border border-border bg-bg-card ${
+        compact ? 'aspect-[16/10] rounded-[10px]' : 'aspect-[16/9] rounded-[16px]'
       }`}
     >
       {image ? (
         <img
           src={image}
-          alt={`${name} project preview`}
+          alt={`Screenshot of the ${name} project`}
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
           loading="lazy"
+          decoding="async"
         />
       ) : (
         <>
           <div className="absolute inset-0 paper-grain opacity-[0.4]" aria-hidden="true" />
-          <div className="absolute inset-2.5 rounded-[4px] border border-dashed border-ink-3/40 pointer-events-none" aria-hidden="true" />
-          <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-ink-3">Project</span>
-          <span className="font-serif text-xl italic text-ink-2">{name}</span>
+          <div
+            className="pointer-events-none absolute inset-2 rounded-[6px] border border-dashed border-ink-3/40"
+            aria-hidden="true"
+          />
+          <span
+            className={`px-3 text-center font-serif italic text-ink-2 ${compact ? 'text-sm' : 'text-2xl'}`}
+          >
+            {name}
+          </span>
         </>
       )}
     </div>
-  )
-}
-
-export function LandingTransition({ children }) {
-  const [pending, setPending] = useState(false)
-  const reduce = useReducedMotion()
-  const navigate = useNavigate()
-
-  const goHome = (event) => {
-    if (reduce) return
-    event.preventDefault()
-    setPending(true)
-    setTimeout(() => navigate('/'), 2100)
-  }
-
-  return (
-    <>
-      {pending && (
-        <motion.div
-          className="name-transition fixed inset-0 z-[100] grid place-items-center bg-bg"
-          initial={{ opacity: 1 }}
-          animate={{ opacity: 0 }}
-          transition={{ delay: 1.5, duration: 0.55 }}
-          onAnimationComplete={() => setPending(false)}
-          aria-live="polite"
-        >
-          <div
-            className="flex gap-[clamp(3px,1.2vw,18px)] font-extrabold tracking-[-0.06em] text-ink"
-            style={{ fontSize: 'clamp(48px, 12vw, 160px)' }}
-            aria-label="Lakshay"
-          >
-            {'LAKSHAY'.split('').map((letter, index) => (
-              <motion.span
-                key={`${letter}-${index}`}
-                className={`inline-block ${index % 2 ? 'font-serif italic font-bold' : ''} ${index === 3 ? 'text-accent' : ''}`}
-                initial={{ opacity: 0, y: 36, rotate: index % 2 ? 8 : -8 }}
-                animate={{ opacity: 1, y: 0, rotate: 0 }}
-                transition={{ delay: index * 0.11, duration: 0.45, ease: 'easeOut' }}
-              >
-                {letter}
-              </motion.span>
-            ))}
-          </div>
-        </motion.div>
-      )}
-      {children}
-    </>
   )
 }

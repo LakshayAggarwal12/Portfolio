@@ -1,58 +1,79 @@
 # Lakshay Aggarwal - Developer Portfolio
 
-Personal portfolio website for **Lakshay Aggarwal**, a full-stack engineer and AI builder. The site presents selected projects, experience, technical capabilities, achievements, and contact links through a responsive, motion-led interface.
+<p align="center">
+  <img src="./public/portfolio-preview.png" alt="Lakshay Aggarwal Developer Portfolio" width="100%">
+</p>
 
-**Live site:** [lakshayaggarwal.vercel.app](https://lakshayaggarwal.vercel.app)
+<p align="center">
+  <strong>Full-Stack Developer · AI Builder</strong>
+</p>
 
-## Overview
+<p align="center">
+  <a href="https://lakshayaggarwal.vercel.app">Live Portfolio</a>
+  ·
+  <a href="https://github.com/LakshayAggarwal12">GitHub</a>
+  ·
+  <a href="https://linkedin.com/in/lakshay-aggarwal-dev">LinkedIn</a>
+</p>
 
-This portfolio is designed to communicate technical work clearly without relying on a UI framework. It includes:
+---
 
-- Responsive layouts for desktop, tablet, and mobile
-- Light and dark themes with persisted user preference
-- Animated section reveals and project interactions
-- Project case studies with technology links, stages, metadata, and demos
-- Experience timeline and achievement highlights
-- Accessible navigation, skip links, focus states, and reduced-motion support
-- Open Graph metadata and a social preview image for link sharing
+## About
 
-## Tech stack
+A personal developer portfolio built to showcase selected projects, engineering experience, technical capabilities, and achievements through a responsive, motion-focused interface.
 
-- **React 19** - component-based UI
-- **Vite** - development server and production bundling
-- **JavaScript (ES modules)** - application logic and content data
-- **CSS** - responsive layout, design tokens, themes, and animations
-- **Motion** - UI transitions and scroll-based interactions
-- **Prettier** - code formatting
+The site is intentionally built without a UI framework, with the emphasis on **clean structure, responsive behavior, accessibility, and interaction design**.
 
-## Project structure
+## Highlights
+
+* Responsive design across desktop, tablet, and mobile
+* Light and dark themes with persisted preferences
+* Motion-based section transitions and interactions
+* Project showcase with technology, metadata, stages, and live demos
+* Experience and achievement sections
+* Accessible navigation, focus states, skip links, and reduced-motion support
+* SEO and Open Graph metadata
+* Responsive typography and custom design system
+* Production deployment on Vercel
+
+## Tech Stack
+
+| Technology     | Purpose                                           |
+| -------------- | ------------------------------------------------- |
+| **React 19**   | UI and component architecture                     |
+| **Vite**       | Development and production tooling                |
+| **JavaScript** | Application logic and content                     |
+| **CSS**        | Layout, themes, animations, and responsive design |
+| **Motion**     | UI transitions and interactive motion             |
+| **Prettier**   | Code formatting                                   |
+
+## Architecture
 
 ```text
 src/
-├── components/    Reusable interface components
-├── data/          Portfolio content and project information
-├── hooks/         Theme, media-query, scroll, and stage behavior
-├── sections/      Page sections rendered by the main application
-├── styles/        Global design system and responsive styles
-├── App.jsx        Application composition
-└── main.jsx       React entry point
+├── components/     Reusable UI components
+├── data/           Portfolio content and project data
+├── hooks/          Custom React hooks
+├── sections/       Portfolio page sections
+├── styles/         Global styles and design system
+├── App.jsx         Application composition
+└── main.jsx        Entry point
 
 public/
 ├── favicon.svg
-├── og.png         Social preview image
-└── resume.pdf     Downloadable resume
-
-index.html         Page metadata and font loading
-vite.config.js     Vite configuration
-package.json       Scripts and dependencies
+├── og.png
+├── portfolio-preview.png
+└── resume.pdf
 ```
 
-## Getting started
+Content is separated from presentation, making projects, experience, skills, and profile information easy to update without modifying the core UI.
 
-### Prerequisites
+## Getting Started
 
-- Node.js 18 or newer
-- npm
+### Requirements
+
+* Node.js 18+
+* npm
 
 ### Installation
 
@@ -68,16 +89,18 @@ npm install
 npm run dev
 ```
 
-The development server is available at `http://localhost:5173`.
+The development server runs at:
 
-### Production build
+```text
+http://localhost:5173
+```
+
+### Production Build
 
 ```bash
 npm run build
 npm run preview
 ```
-
-`npm run build` creates the optimized production bundle in `dist/`. `npm run preview` serves that build locally for verification.
 
 ### Formatting
 
@@ -85,56 +108,43 @@ npm run preview
 npm run format
 ```
 
-## Updating portfolio content
+## Content
 
-Most content is intentionally kept separate from the UI:
+Portfolio content is managed through dedicated data files:
 
-| File | Purpose |
-| --- | --- |
-| `src/data/profile.js` | Name, branding, email, social links, and resume link |
-| `src/data/projects.js` | Project descriptions, technologies, stages, metadata, and URLs |
-| `src/data/experience.js` | Experience timeline and achievements |
-| `src/data/skills.js` | Skills, capabilities, and current focus |
-| `src/styles/global.css` | Colors, typography, spacing, responsive behavior, and animation |
-| `index.html` | Title, SEO description, favicon, and social sharing metadata |
-| `public/og.png` | Open Graph preview image shown by supported platforms |
+```text
+src/data/profile.js
+src/data/projects.js
+src/data/experience.js
+src/data/skills.js
+```
 
-When adding or changing content, make sure every link works and every project claim accurately reflects the underlying work.
+Global visual configuration is primarily handled through:
+
+```text
+src/styles/global.css
+```
 
 ## Deployment
 
-The project can be deployed to any static hosting provider that supports Vite builds.
+The portfolio is deployed using **Vercel**.
 
-For Vercel:
-
-1. Import the repository into Vercel.
-2. Select **Vite** as the framework preset.
-3. Use `npm run build` as the build command.
-4. Set `dist` as the output directory.
-5. Deploy.
-
-The project includes production metadata for the deployed Vercel URL, including Open Graph title, description, URL, image, canonical URL, and favicon.
-
-After updating the social preview image or metadata, link platforms may continue showing a cached preview. Share the exact production URL again after deployment or use the platform's link debugger/cache refresh tool.
-
-## Quality checklist
-
-Before publishing changes:
+The project uses the standard Vite production workflow:
 
 ```bash
 npm run build
 ```
 
-Then verify:
-
-- Navigation and anchor links work
-- The layout is usable at mobile width
-- Light and dark themes both render correctly
-- The theme preference persists after refresh
-- Project, social, email, and resume links are valid
-- The live URL returns the current Open Graph image
-- Reduced-motion preferences do not prevent access to content
+The generated `dist/` directory contains the production build.
 
 ## License
 
-This repository contains personal portfolio content and is intended primarily for personal use. The implementation may be used as a reference, but please replace personal content, branding, project details, and assets before publishing a derivative portfolio.
+This repository contains personal branding, portfolio content, project information, and assets belonging to Lakshay Aggarwal.
+
+The source code may be referenced for learning, but personal content, branding, project descriptions, resume, and assets should not be reused as-is.
+
+---
+
+<p align="center">
+  Built with React, CSS, Motion, and a questionable number of iterations.
+</p>

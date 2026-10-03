@@ -1,34 +1,43 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { AppShell } from './components/portfolio-shell.jsx'
-import HomePage from './pages/HomePage.jsx'
-import AboutPage from './pages/AboutPage.jsx'
-import ContactPage from './pages/ContactPage.jsx'
-import ExperiencePage from './pages/ExperiencePage.jsx'
-import ProjectsPage from './pages/ProjectsPage.jsx'
-import ProjectDetailPage from './pages/ProjectDetailPage.jsx'
-import NotFoundPage from './pages/NotFoundPage.jsx'
-
-/**
- * One layout route wraps every page in the app shell, so the header,
- * footer and the single scroll region persist across navigation. Pages
- * only describe their own content — scroll handling, page transitions
- * and active nav state all live in AppShell.
- */
-const router = createBrowserRouter([
-  {
-    element: <AppShell />,
-    children: [
-      { path: '/', element: <HomePage /> },
-      { path: '/about', element: <AboutPage /> },
-      { path: '/contact', element: <ContactPage /> },
-      { path: '/experience', element: <ExperiencePage /> },
-      { path: '/projects', element: <ProjectsPage /> },
-      { path: '/projects/:slug', element: <ProjectDetailPage /> },
-      { path: '*', element: <NotFoundPage /> },
-    ],
-  },
-])
-
+import { Navbar, sectionOrder } from './components/Navbar'
+import { CustomCursor } from './components/CustomCursor'
+import { ScrollRuler } from './components/ScrollRuler'
+import { Footer } from './components/Footer'
+import { Hero } from './sections/Hero'
+import { About } from './sections/About'
+import { Capabilities } from './sections/Capabilities'
+import { Projects } from './sections/Projects'
+import { Experience } from './sections/Experience'
+import { Achievements } from './sections/Achievements'
+import { Stack } from './sections/Stack'
+import { Education } from './sections/Education'
+import { Contact } from './sections/Contact'
+import { Closing } from './sections/Closing'
+import { useTheme } from './hooks/useTheme'
+import { useActiveSection } from './hooks/useActiveSection'
 export default function App() {
-  return <RouterProvider router={router} />
+  const { dark, toggle } = useTheme()
+  const active = useActiveSection(sectionOrder)
+  return (
+    <>
+      <a className="skip" href="#about">
+        Skip to content
+      </a>
+      <Navbar active={active} dark={dark} onToggleTheme={toggle} />
+      <CustomCursor />
+      <ScrollRuler />
+      <main>
+        <Hero />
+        <About />
+        <Capabilities />
+        <Projects />
+        <Experience />
+        <Achievements />
+        <Stack />
+        <Education />
+        <Contact />
+        <Closing />
+      </main>
+      <Footer />
+    </>
+  )
 }

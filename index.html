@@ -2,38 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9f7" />
-    <title>Lakshay Aggarwal — Software Engineer &amp; AI/ML Developer</title>
-    <meta name="description" content="Portfolio of Lakshay Aggarwal — full stack development, data science and AI/ML projects." />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lakshay Aggarwal | Full-stack and AI engineer</title>
+    <meta name="description" content="Portfolio of Lakshay Aggarwal. Full-stack applications, AI-powered systems and data products." />
+    <meta property="og:title" content="Lakshay Aggarwal | Full-stack and AI engineer" />
+    <meta property="og:description" content="Full-stack applications, AI-powered systems and data products." />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Lakshay Aggarwal — Software Engineer &amp; AI/ML Developer" />
-    <meta property="og:description" content="Portfolio of Lakshay Aggarwal — full stack development, data science and AI/ML projects." />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/apple-icon.png" />
-
-    <!-- Apply the saved theme before first paint so dark-mode visitors
-         never see a flash of the light palette. -->
+    <meta name="theme-color" content="#F2F2F0" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23141414'/%3E%3Cpath d='M9 7v18h14' fill='none' stroke='%23F2F2F0' stroke-width='3'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <script>
       (function () {
         try {
-          var stored = localStorage.getItem('theme')
-          var dark = stored ? stored === 'dark'
-            : window.matchMedia('(prefers-color-scheme: dark)').matches
-          if (dark) document.documentElement.classList.add('dark')
-          var meta = document.querySelector('meta[name="theme-color"]')
-          if (meta && dark) meta.setAttribute('content', '#0c0d0e')
+          var s = localStorage.getItem('theme');
+          var d = s ? s === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (d) document.documentElement.classList.add('dark');
         } catch (e) {}
-      })()
+      })();
     </script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Trimmed to the weights actually used: 400/500/600/700/800 Inter,
-         700 Playfair. Three unused weights removed from the request. -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>

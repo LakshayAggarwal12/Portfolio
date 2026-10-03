@@ -1,171 +1,140 @@
-# Lakshay Aggarwal | Portfolio
+# Lakshay Aggarwal - Developer Portfolio
 
-React + Vite + `motion`, plain JavaScript, plain CSS. No UI framework, no icon library.
+Personal portfolio website for **Lakshay Aggarwal**, a full-stack engineer and AI builder. The site presents selected projects, experience, technical capabilities, achievements, and contact links through a responsive, motion-led interface.
 
-```
+**Live site:** [lakshayaggarwal.vercel.app](https://lakshayaggarwal.vercel.app)
+
+## Overview
+
+This portfolio is designed to communicate technical work clearly without relying on a UI framework. It includes:
+
+- Responsive layouts for desktop, tablet, and mobile
+- Light and dark themes with persisted user preference
+- Animated section reveals and project interactions
+- Project case studies with technology links, stages, metadata, and demos
+- Experience timeline and achievement highlights
+- Accessible navigation, skip links, focus states, and reduced-motion support
+- Open Graph metadata and a social preview image for link sharing
+
+## Tech stack
+
+- **React 19** - component-based UI
+- **Vite** - development server and production bundling
+- **JavaScript (ES modules)** - application logic and content data
+- **CSS** - responsive layout, design tokens, themes, and animations
+- **Motion** - UI transitions and scroll-based interactions
+- **Prettier** - code formatting
+
+## Project structure
+
+```text
 src/
-  data/         <- ALL your content lives here (edit these, not the components)
-    profile.js      contact links (start here)
-    projects.js     the four case studies: copy, stack, stages, links
-    experience.js   timeline and achievements
-    skills.js       stack groups, capability rows, "currently building" lines
-  sections/     one file per page section
-  components/   Navbar, Action, Icon, ProjectShowcase, ProjectVisual, Timeline, ...
-  hooks/        theme, media queries, active section, auto-stepping stages
-  styles/global.css   design tokens (colours, fonts) + all styling
-index.html      title, meta tags, font links, theme bootstrap script
+├── components/    Reusable interface components
+├── data/          Portfolio content and project information
+├── hooks/         Theme, media-query, scroll, and stage behavior
+├── sections/      Page sections rendered by the main application
+├── styles/        Global design system and responsive styles
+├── App.jsx        Application composition
+└── main.jsx       React entry point
+
+public/
+├── favicon.svg
+├── og.png         Social preview image
+└── resume.pdf     Downloadable resume
+
+index.html         Page metadata and font loading
+vite.config.js     Vite configuration
+package.json       Scripts and dependencies
 ```
 
----
+## Getting started
 
-## 1. Run it locally
+### Prerequisites
 
-You need Node 18 or newer (`node -v`).
+- Node.js 18 or newer
+- npm
+
+### Installation
 
 ```bash
+git clone https://github.com/LakshayAggarwal12/Portfolio.git
+cd Portfolio
 npm install
-npm run dev          # http://localhost:5173
 ```
 
-Other commands:
-
-| Command | What it does |
-| --- | --- |
-| `npm run build` | Production build into `dist/` (multi-file). Use this for hosting. |
-| `npm run build:single` | Same, but inlined into one `dist/index.html`. Handy for sharing one file. |
-| `npm run preview` | Serves `dist/` locally so you can test the real build. |
-| `npm run format` | Prettier over `src/`. |
-
----
-
-## 2. Configuration checklist (do these in order)
-
-### A. Contact links: `src/data/profile.js`
-- [ ] `linkedin`: full URL, e.g. `https://www.linkedin.com/in/your-handle`
-- [ ] `email`: plain address, e.g. `you@example.com` (the site builds the `mailto:` link and the copy button)
-- [ ] `github`: already set to `https://github.com/LakshayAggarwal12`, confirm it
-- [ ] `leetcode` (optional): profile URL. The row stays hidden while this is `null`
-- [ ] `resume` (optional): put `resume.pdf` in `public/` and set `'/resume.pdf'`, or use a Drive/Notion link
-
-Anything left `null` shows as a dashed "pending" placeholder on the live site, so a recruiter would see it. Fill every one you can before you deploy.
-
-### B. Projects: `src/data/projects.js`
-For each of ScoutFlow, EnergyCast, TaskFlow and HireSense:
-- [ ] `links.github`: repository URL
-- [ ] `links.demo`: live URL (HireSense is already set; verify it still loads)
-- [ ] `links.architecture` (optional): a diagram, README section or blog post. The button only appears when set
-- [ ] `description`, `tech`: confirm every technology is actually in the project
-- [ ] `stages`: the one-line notes under each stage. Make sure each sentence is true of your implementation
-- [ ] `meta`: the small facts that appear on hover (skills taxonomy size, ATS checks, hosting, etc.). Delete any you cannot back up
-
-### C. Experience and achievements: `src/data/experience.js`
-- [ ] IBM internship dates and wording
-- [ ] "Campus and technical work" entry: rewrite it with something specific, or delete it
-- [ ] Achievements: title, organisation and note must match your certificates exactly
-
-### D. Skills and numbers: `src/data/skills.js`
-- [ ] "currently building" lines. The DSA line says **LeetCode, 280+ problems solved**. Update or remove it
-- [ ] Stack groups: remove anything you would not want to be asked about in an interview
-- [ ] The stack section links each technology to the projects using it, based on `tech` in `projects.js`. If a skill is called something different there, add it to `techAliases`
-
-### E. Page metadata: `index.html`
-- [ ] `<title>` and `description`
-- [ ] After you have a URL, add `<link rel="canonical" href="https://your-site.com/">` and `og:url`
-- [ ] Add a social preview image: a 1200x630 PNG in `public/og.png`, then
-  `<meta property="og:image" content="https://your-site.com/og.png">` and `<meta name="twitter:card" content="summary_large_image">`
-- [ ] Favicon: replace the inline one with `public/favicon.svg` and `<link rel="icon" href="/favicon.svg">`
-
-### F. Look and feel: `src/styles/global.css` (top of file)
-- [ ] Colours are tokens in `:root` (light) and `.dark` (dark). `--accent` is the single accent colour
-- [ ] Fonts are Bricolage Grotesque and IBM Plex Mono, loaded from Google Fonts in `index.html`. To self-host, download them (for example from fontsource), put them in `public/fonts/`, add `@font-face` rules and delete the Google `<link>` tags
-- [ ] Brand text in the nav and footer: `brand` in `profile.js`
-
-### G. Final read-through
-- [ ] Every sentence on the page is true and you can talk about it
-- [ ] No "link pending" or "add ... in data/profile.js" text is visible
-- [ ] Click every button and link
-- [ ] Toggle light and dark, refresh, confirm the choice sticks
-- [ ] Check at phone width (browser dev tools, 390px) and on a real phone
-- [ ] Turn on "reduce motion" in your OS and confirm nothing is broken
-- [ ] Run Lighthouse in Chrome dev tools (Performance, Accessibility, SEO) and note the scores
-
----
-
-## 3. Deploy
-
-First put the project on GitHub:
+### Development
 
 ```bash
-git init
-git add .
-git commit -m "Portfolio"
-git branch -M main
-git remote add origin https://github.com/LakshayAggarwal12/<repo-name>.git
-git push -u origin main
+npm run dev
 ```
 
-### Option 1: Vercel (recommended, free, 2 minutes)
-1. Go to vercel.com, sign in with GitHub, click **Add New > Project**, import the repo.
-2. Framework preset: **Vite**. Build command `npm run build`, output directory `dist`. These are auto-detected.
-3. Click **Deploy**. You get `https://<name>.vercel.app`. Every push to `main` redeploys.
-4. Custom domain: **Project > Settings > Domains**, add it, then follow the DNS instructions Vercel shows.
+The development server is available at `http://localhost:5173`.
 
-### Option 2: Netlify
-1. app.netlify.com > **Add new site > Import from Git**, pick the repo.
-2. Build command `npm run build`, publish directory `dist`.
-3. Domain settings are under **Site configuration > Domain management**.
+### Production build
 
-### Option 3: Cloudflare Pages
-1. Workers & Pages > **Create > Pages > Connect to Git**.
-2. Framework preset **Vite**, build command `npm run build`, output `dist`.
+```bash
+npm run build
+npm run preview
+```
 
-### Option 4: GitHub Pages
-Project sites live at `https://<user>.github.io/<repo-name>/`, so the app needs a base path.
-1. Add `.github/workflows/deploy.yml`:
-   ```yaml
-   name: Deploy
-   on: { push: { branches: [main] } }
-   permissions: { contents: read, pages: write, id-token: write }
-   jobs:
-     build:
-       runs-on: ubuntu-latest
-       steps:
-         - uses: actions/checkout@v4
-         - uses: actions/setup-node@v4
-           with: { node-version: 20, cache: npm }
-         - run: npm ci
-         - run: npm run build
-           env: { BASE_PATH: /<repo-name>/ }
-         - uses: actions/upload-pages-artifact@v3
-           with: { path: dist }
-     deploy:
-       needs: build
-       runs-on: ubuntu-latest
-       environment: { name: github-pages }
-       steps:
-         - uses: actions/deploy-pages@v4
-   ```
-2. Repo **Settings > Pages > Source: GitHub Actions**.
-3. If you name the repo `LakshayAggarwal12.github.io` it is served from the root, so drop `BASE_PATH`.
+`npm run build` creates the optimized production bundle in `dist/`. `npm run preview` serves that build locally for verification.
 
-Note: files in `public/` (for example `/resume.pdf`) are referenced with a leading slash. On a GitHub Pages project site, use `import.meta.env.BASE_URL + 'resume.pdf'` or a full URL instead.
+### Formatting
 
----
+```bash
+npm run format
+```
 
-## 4. After deploying
+## Updating portfolio content
 
-- [ ] Open the live URL on your phone and on desktop
-- [ ] Paste the link into LinkedIn or WhatsApp and check the preview card (needs the `og:image` from step E)
-- [ ] Submit the URL to Google Search Console if you want it indexed
-- [ ] Add the live URL to your GitHub profile, LinkedIn and resume
-- [ ] When a project gets a new link or feature, edit `src/data/projects.js`, push, and it redeploys
+Most content is intentionally kept separate from the UI:
 
-## Troubleshooting
-
-| Symptom | Fix |
+| File | Purpose |
 | --- | --- |
-| Blank page after deploy on GitHub Pages | `BASE_PATH` is missing or wrong (must start and end with `/`) |
-| 404 on refresh | Not an issue here: it is a single page with `#` anchors |
-| Fonts look different from the preview | Google Fonts blocked by a network or extension. Self-host them (step F) |
-| Projects do not pin while scrolling | Expected on screens under 1024px wide and with reduced motion on. They step through automatically instead |
-| Custom cursor missing | Intended on touch devices and with reduced motion |
+| `src/data/profile.js` | Name, branding, email, social links, and resume link |
+| `src/data/projects.js` | Project descriptions, technologies, stages, metadata, and URLs |
+| `src/data/experience.js` | Experience timeline and achievements |
+| `src/data/skills.js` | Skills, capabilities, and current focus |
+| `src/styles/global.css` | Colors, typography, spacing, responsive behavior, and animation |
+| `index.html` | Title, SEO description, favicon, and social sharing metadata |
+| `public/og.png` | Open Graph preview image shown by supported platforms |
+
+When adding or changing content, make sure every link works and every project claim accurately reflects the underlying work.
+
+## Deployment
+
+The project can be deployed to any static hosting provider that supports Vite builds.
+
+For Vercel:
+
+1. Import the repository into Vercel.
+2. Select **Vite** as the framework preset.
+3. Use `npm run build` as the build command.
+4. Set `dist` as the output directory.
+5. Deploy.
+
+The project includes production metadata for the deployed Vercel URL, including Open Graph title, description, URL, image, canonical URL, and favicon.
+
+After updating the social preview image or metadata, link platforms may continue showing a cached preview. Share the exact production URL again after deployment or use the platform's link debugger/cache refresh tool.
+
+## Quality checklist
+
+Before publishing changes:
+
+```bash
+npm run build
+```
+
+Then verify:
+
+- Navigation and anchor links work
+- The layout is usable at mobile width
+- Light and dark themes both render correctly
+- The theme preference persists after refresh
+- Project, social, email, and resume links are valid
+- The live URL returns the current Open Graph image
+- Reduced-motion preferences do not prevent access to content
+
+## License
+
+This repository contains personal portfolio content and is intended primarily for personal use. The implementation may be used as a reference, but please replace personal content, branding, project details, and assets before publishing a derivative portfolio.

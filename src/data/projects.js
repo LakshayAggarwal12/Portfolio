@@ -23,7 +23,7 @@ export const projects = [
       { k: 'queue', v: 'BullMQ on Redis' },
       { k: 'backend', v: 'Node.js, Express and Python' },
     ],
-    links: { github: null, demo: null, architecture: null },
+    links: { github: 'https://github.com/LakshayAggarwal12/ScoutFlow', demo: 'https://scout-flow-lovat.vercel.app/', architecture: null },
     visualCaption: 'pipeline, one stage per scroll step',
   },
   {
@@ -44,7 +44,7 @@ export const projects = [
       { k: 'metrics', v: 'MAE, RMSE, MAPE' },
       { k: 'hosting', v: 'Render' },
     ],
-    links: { github: null, demo: null, architecture: null },
+    links: { github: 'https://github.com/LakshayAggarwal12/EnergyCast', demo: 'https://energy-cast.vercel.app', architecture: null },
     visualCaption: 'schematic series, no real values plotted',
   },
   {
@@ -65,7 +65,7 @@ export const projects = [
       { k: 'realtime', v: 'Socket.IO' },
       { k: 'ai', v: 'Groq, reviewed by the user before saving' },
     ],
-    links: { github: null, demo: null, architecture: null },
+    links: { github: 'https://github.com/LakshayAggarwal12/TaskFlow', demo: 'https://taskflow-gray-two.vercel.app', architecture: null },
     visualCaption: 'state diagram of a task, not a live board',
   },
   {
@@ -88,7 +88,7 @@ export const projects = [
       { k: 'ats', v: '7 parseability checks' },
       { k: 'hosting', v: 'Vercel and Render' },
     ],
-    links: { github: null, demo: 'https://hiresense-sepia.vercel.app', architecture: null },
+    links: { github: 'https://github.com/LakshayAggarwal12/HireSense', demo: 'https://hiresense-sepia.vercel.app', architecture: null },
     visualCaption: 'schematic documents, no real resume shown',
   },
 ]

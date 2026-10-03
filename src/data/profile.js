@@ -11,10 +11,10 @@ export const profile = {
   brand: 'Lakshay.A',
   links: {
     github: 'https://github.com/LakshayAggarwal12',
-    linkedin: null, // e.g. 'https://www.linkedin.com/in/your-handle'
-    email: null, // e.g. 'you@example.com'
-    leetcode: null, // optional, e.g. 'https://leetcode.com/u/your-handle'
-    resume: null, // optional, e.g. '/resume.pdf' (put the file in /public) or a Drive link
+    linkedin: 'https://www.linkedin.com/in/lakshay-aggarwal-dev',
+    email: 'lakshaydev1205@gmail.com', 
+    leetcode: 'https://leetcode.com/u/Lakshay_Aggarwal12', // optional, e.g. 'https://leetcode.com/u/your-handle'
+    resume: 'https://drive.google.com/file/d/17qQ-M0dFB0fzL2mZmnJUVinLf3oVQBk1/view?usp=sharing', // optional, e.g. '/resume.pdf' (put the file in /public) or a Drive link
   },
 }
 

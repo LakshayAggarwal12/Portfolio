@@ -1,5 +1,5 @@
 export const skillGroups = [
-  { label: 'languages', items: ['JavaScript', 'TypeScript', 'Python', 'C++', 'SQL'] },
+  { label: 'languages', items: ['JavaScript', 'Python', 'C++', 'SQL'] },
   { label: 'frontend', items: ['React', 'HTML', 'CSS', 'Tailwind'] },
   { label: 'backend', items: ['Node.js', 'Express', 'FastAPI', 'REST', 'JWT', 'Socket.IO'] },
   { label: 'database', items: ['PostgreSQL', 'MongoDB', 'Redis'] },

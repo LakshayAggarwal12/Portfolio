@@ -11,7 +11,6 @@ export const sectionOrder = [
   'signals',
   'stack',
   'building',
-  'education',
   'contact',
   'closing',
 ]

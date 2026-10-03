@@ -338,15 +338,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .focus-out .caret { width: 0.5em; height: 1.05em; margin-left: 0; }
 @media (min-width: 760px) { .focus { grid-template-columns: 240px 1fr; } }
 
-/* ---------- education ---------- */
-.edu { border-top: 1px solid var(--line); }
-.edu-row { display: grid; gap: 6px 24px; padding: clamp(22px, 3vw, 34px) 0; border-bottom: 1px solid var(--line); }
-.edu-when { font-size: 0.82rem; color: var(--muted); }
-.edu-school { font-size: clamp(1.5rem, 3vw, 2.4rem); font-weight: 580; letter-spacing: -0.03em; line-height: 1.05; }
-.edu-detail { margin-top: 6px; color: var(--fg-2); }
-.edu-score { font-size: 0.9rem; }
-@media (min-width: 900px) { .edu-row { grid-template-columns: 160px 1fr auto; align-items: baseline; } }
-
 /* ---------- contact + closing ---------- */
 .contact-text { margin-top: clamp(28px, 4vw, 48px); max-width: 44ch; color: var(--fg-2); font-size: 1.2rem; }
 

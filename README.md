@@ -7,7 +7,7 @@ src/
   data/         <- ALL your content lives here (edit these, not the components)
     profile.js      contact links (start here)
     projects.js     the four case studies: copy, stack, stages, links
-    experience.js   timeline, education, achievements
+    experience.js   timeline and achievements
     skills.js       stack groups, capability rows, "currently building" lines
   sections/     one file per page section
   components/   Navbar, Action, Icon, ProjectShowcase, ProjectVisual, Timeline, ...
@@ -58,8 +58,7 @@ For each of ScoutFlow, EnergyCast, TaskFlow and HireSense:
 - [ ] `stages`: the one-line notes under each stage. Make sure each sentence is true of your implementation
 - [ ] `meta`: the small facts that appear on hover (skills taxonomy size, ATS checks, hosting, etc.). Delete any you cannot back up
 
-### C. Experience, education, achievements: `src/data/experience.js`
-- [ ] **CGPA**: set to `8.56`. Confirm it is current
+### C. Experience and achievements: `src/data/experience.js`
 - [ ] IBM internship dates and wording
 - [ ] "Campus and technical work" entry: rewrite it with something specific, or delete it
 - [ ] Achievements: title, organisation and note must match your certificates exactly

@@ -9,7 +9,6 @@ import { Projects } from './sections/Projects'
 import { Experience } from './sections/Experience'
 import { Achievements } from './sections/Achievements'
 import { Stack } from './sections/Stack'
-import { Education } from './sections/Education'
 import { Contact } from './sections/Contact'
 import { Closing } from './sections/Closing'
 import { useTheme } from './hooks/useTheme'
@@ -33,7 +32,6 @@ export default function App() {
         <Experience />
         <Achievements />
         <Stack />
-        <Education />
         <Contact />
         <Closing />
       </main>

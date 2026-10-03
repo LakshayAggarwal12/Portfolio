@@ -92,11 +92,6 @@ export function Hero() {
             I build full-stack applications, AI-powered systems and data products that turn complex ideas into
             usable software.
           </motion.p>
-          <motion.ul className="hero-meta mono" {...fade(1.1)} aria-label="Education">
-            <li>CSE (Data Science)</li>
-            <li>ABES Engineering College</li>
-            <li>2024–2028</li>
-          </motion.ul>
         </div>
 
         <motion.div className="hero-actions" {...fade(1.25)}>

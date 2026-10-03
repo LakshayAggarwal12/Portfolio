@@ -1,12 +1,12 @@
 /* ---------- tokens ---------- */
 :root {
-  --bg: #f2f2f0;
-  --bg-2: #ededeb;
-  --bg-3: #e4e4e0;
+  --bg: #e7e5df;
+  --bg-2: #dedcd6;
+  --bg-3: #d4d2cb;
   --fg: #141414;
   --fg-2: #41413e;
   --muted: #6a6a65;
-  --line: #d3d3ce;
+  --line: #c5c3bc;
   --accent: #2740d6;
   --on-accent: #f5f5f3;
   --sans: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif;

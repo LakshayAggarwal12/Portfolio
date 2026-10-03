@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
 import { ThemeToggle } from './ThemeToggle'
-import { profile } from '../data/profile'
+import { profile, mailto } from '../data/profile'
+import { Action } from './Action'
 export const sectionOrder = [
   'hero',
   'about',
@@ -98,6 +99,23 @@ export function Navbar({ active, dark, onToggleTheme }) {
             </a>
           ))}
         </nav>
+        <ul className="menu-social" aria-label="Elsewhere">
+          <li>
+            <Action variant="text" icon="github" href={profile.links.github}>
+              GitHub
+            </Action>
+          </li>
+          <li>
+            <Action variant="text" icon="linkedin" href={profile.links.linkedin}>
+              LinkedIn
+            </Action>
+          </li>
+          <li>
+            <Action variant="text" icon="mail" href={mailto(profile.links.email)}>
+              Email
+            </Action>
+          </li>
+        </ul>
       </div>
     </header>
   )

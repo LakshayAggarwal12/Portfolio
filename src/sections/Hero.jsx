@@ -4,6 +4,7 @@ import { MagneticButton } from '../components/MagneticButton'
 import { Action } from '../components/Action'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import { profile } from '../data/profile'
+import { HeroAvatar } from '../components/HeroAvatar'
 const ease = [0.2, 0.7, 0.1, 1]
 export function Hero() {
   const reduce = useReducedMotion() ?? false
@@ -64,6 +65,7 @@ export function Hero() {
   )
   return (
     <section id="hero" className="hero" ref={ref}>
+      <HeroAvatar />
       <div className="hero-guides" aria-hidden="true">
         <i />
         <i />
